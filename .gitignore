@@ -7,3 +7,6 @@ note
 # Package
 /__pycache__
 /.ipynb_checkpoints
+
+# API Credentials
+credentials.py

@@ -1,17 +1,70 @@
 import requests
 import random
+import time
 import numpy as np
 
+from credentials import headers
 
-# Setup the API Headers
-headers={
-    'Authorization': 'token d1bc0d9419dfe75e47f0156584675dea05690142',
-}
+# Returns the number of API requests remaining under the current credentials
+def remaining_budget():
+    response = requests.get('https://api.github.com/rate_limit', headers=headers)
+    data = response.json()['rate']['remaining']
+    return data
 
 def sample_id(id):
     response = requests.get('https://api.github.com/users?since='+str(id), headers=headers)
     return [user['id'] for user in response.json()]
 
+def exhaust_range(id_low, id_high, granularity):
+    active_in_range = 0
+    _id = id_low
+    _stop_id = id_low
+    _requests_remaining=True
+    _qr =True
+
+    # While we haven't reached the Max
+    while _stop_id < id_high:
+
+        # While we still have budget to spend
+        while remaining_budget() > granularity:
+            print(f"Sampling from ID: {_id} with Granularity: {granularity}")
+            for _ in range(granularity):
+                active_ids = sample_id(_id)
+
+                if active_ids[-1] < id_high:
+                    active_in_range += 30
+                elif id_high in active_ids:
+                    for user_id in active_ids:
+                        if user_id <= id_high:
+                            active_in_range += 1
+                        else:
+                            print("WE FOUND IT!!!!")
+                            return active_in_range
+                elif active_ids[-1] > id_high:
+                    return active_in_range
+                _id = active_ids[-1]
+
+        # Do we really need this?
+        _stop_id = _id
+
+        # Oops we ran out of budget
+        print("going to sleep for 5 minutes zzz...")
+        time.sleep(300)
+
+
+
+
+if active_ids[-1] < id_high:
+    active_in_range += 30
+elif id_high in active_ids:
+    for user_id in active_ids:
+        if user_id <= id_high:
+            active_in_range += 1
+        else:
+            print("WE FOUND IT!!!!")
+            return active_in_range
+elif active_ids[-1]  > id_high:
+    return active_in_range
 
 def sample_range(id_low, id_high):
     active_in_range = 0
