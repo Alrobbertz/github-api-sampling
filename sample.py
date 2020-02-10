@@ -52,20 +52,6 @@ def exhaust_range(id_low, id_high, granularity):
         time.sleep(300)
 
 
-
-
-if active_ids[-1] < id_high:
-    active_in_range += 30
-elif id_high in active_ids:
-    for user_id in active_ids:
-        if user_id <= id_high:
-            active_in_range += 1
-        else:
-            print("WE FOUND IT!!!!")
-            return active_in_range
-elif active_ids[-1]  > id_high:
-    return active_in_range
-
 def sample_range(id_low, id_high):
     active_in_range = 0
     _id = id_low
