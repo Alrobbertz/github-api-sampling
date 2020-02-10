@@ -27,7 +27,7 @@ def exhaust_range(id_low, id_high, granularity):
 
         # While we still have budget to spend
         while remaining_budget() > granularity:
-            print(f"Sampling from ID: {_id} with Granularity: {granularity}")
+            print(f"Sampling from ID: {_id} to {id_high} with Granularity: {granularity}")
             for _ in range(granularity):
                 active_ids = sample_id(_id)
 
