@@ -7,6 +7,8 @@ note
 # Package
 /__pycache__
 /.ipynb_checkpoints
+/.vscode
 
 # API Credentials
 credentials.py
+credentials-jet.py
