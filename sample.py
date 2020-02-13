@@ -101,7 +101,7 @@ def simple_random_range_sample(M=60654216, B=1000, E=10, alpha=3):
             print(f'Sampling: t:{t} range:{(start_id, end_id)} Foud:{active_users}')
         
         # Tabulation Stage
-        n_hat = int(n/m) * sum(active)
+        n_hat = int(n/m * sum(active))
         variance = np.var(active)
 
         # Save the results
