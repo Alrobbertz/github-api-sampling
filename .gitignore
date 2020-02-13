@@ -1,8 +1,9 @@
-# Data Files
+# Data and Report Files
 *.csv
 *.xlsx
 *.docx
 note
+*.pdf
 
 # Package
 /__pycache__
@@ -12,3 +13,4 @@ note
 # API Credentials
 credentials.py
 credentials-jet.py
+credentials-b.py

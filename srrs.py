@@ -6,13 +6,13 @@ from sample import simple_random_range_sample
 M=1000000
 
 # Set the Budget (# of API call allocated)
-B=50
+B=4800
 
 # Set the number of Estimations to make
-E=50
+E=10
 
 # Set the number of Queries to Exhaust a partition
-alpha=1
+alpha=3
 
 
 # number of user IDs in each partition (assume 30 IDs from each query)
